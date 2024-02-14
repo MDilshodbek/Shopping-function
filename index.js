@@ -21,8 +21,17 @@ delete shopping.beef;
 var lamb = shopping.lamb;
 var chicken = shopping.chicken;
 var meat_type = chicken;
-var total = 0;
+var cost = 0;
+
 if (meat_type) {
-  total = meat_type.count * meat_type.price;
-  console.log(total);
+  cost = meat_type.count * meat_type.price;
+  console.log(cost);
 }
+
+// function total(type) {
+//   if (type) {
+//     cost = type.count * type.price;
+//   }
+// }
+// total(lamb);
+// console.log(cost);
