@@ -1,37 +1,31 @@
-var shopping = {
-  beef: {
-    count: 4,
-    price: 12000,
-  },
-  lamb: {
-    count: 4,
-    price: 13000,
-  },
-};
+var products = {};
 
-// To create
-shopping.chicken = {
-  count: 4,
-  price: 9000,
-};
+function cart(items) {
+  switch (items.type) {
+    case "buy":
+      products[items.p_name] = {
+        price: items.price,
+        count: items.count,
+      };
+      break;
+    case "cancel":
+      delete products[items.p_name];
+  }
 
-// To delete
-delete shopping.beef;
+  sum = 0;
+  var goods = Object.values(products);
 
-var lamb = shopping.lamb;
-var chicken = shopping.chicken;
-var meat_type = chicken;
-var cost = 0;
-
-if (meat_type) {
-  cost = meat_type.count * meat_type.price;
-  console.log(cost);
+  for (let i = 0; i < goods.length; i++) {
+    sum += goods[i].price * goods[i].count;
+  }
+  return {
+    products: products,
+    total_count: Object.keys(products).length,
+    total_price: sum,
+  };
 }
 
-// function total(type) {
-//   if (type) {
-//     cost = type.count * type.price;
-//   }
-// }
-// total(lamb);
-// console.log(cost);
+console.log(cart({ type: "buy", p_name: "lamb", price: 6000, count: 4 }));
+console.log(cart({ type: "buy", p_name: "beef", price: 9000, count: 2 }));
+console.log(cart({ type: "buy", p_name: "chicken", price: 8000, count: 4 }));
+console.log(cart({ type: "cancel", p_name: "beef", price: 6000, count: 4 }));
