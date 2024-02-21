@@ -1,0 +1,27 @@
+var products = {};
+
+function cart(shoes) {
+  switch (shoes.type) {
+    case "buy":
+      products[shoes.name] = {
+        count: shoes.count,
+        price: shoes.price,
+      };
+      break;
+    case "cancel":
+      delete products[shoes.name];
+  }
+
+  var sum = 0;
+  var sneakers = Object.values(shoes);
+
+  for (let i = 0; i < sneakers.length; i++) {
+    sum += sneakers[i].count + sneakers[i].price;
+  }
+  return { products: products, count: sneakers.length, total_price: sum };
+}
+
+shoes({ type: "buy", name: "Nike", price: 90, count: 2 });
+shoes({ type: "buy", name: "Adidas", price: 80, count: 2 });
+shoes({ type: "buy", name: "New balance", price: 110, count: 1 });
+shoes({ type: "cancel", name: "Nike" });
